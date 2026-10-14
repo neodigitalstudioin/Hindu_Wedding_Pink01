@@ -77,7 +77,7 @@
       this.audioCtx = null;
       this.gainNode = null;
       this.intervalId = null;
-      this.audioElement = document.getElementById('weddingBgAudio') || new Audio('assets/wedding_music.mp3');
+      this.audioElement = document.getElementById('weddingBgAudio') || new Audio('assets/wedding_song.mp3');
       this.audioElement.loop = true;
       this.audioElement.preload = 'auto';
       this.audioElement.volume = 1.0;
@@ -95,7 +95,7 @@
       });
 
       this.audioElement.addEventListener('error', (err) => {
-        console.warn('assets/wedding_music.mp3 error, fallback to drone synthesizer', err);
+        console.warn('assets/wedding_song.mp3 error, fallback to drone synthesizer', err);
         this.hasCustomMp3 = false;
         if (this.isPlaying) {
           this.startWebAudioDrone();

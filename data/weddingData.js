@@ -32,7 +32,7 @@ window.weddingDataDefault = {
     message: "Together with our families, we joyfully invite you to celebrate our union.",
     verse: "Cordially invite your esteemed presence with family on the occasion of the marriage of our daughter",
     subheading: "Reshma S (Ponnu) with Arun Raj GK",
-    musicUrl: "assets/wedding_music.mp3",
+    musicUrl: "assets/wedding_song.mp3",
     hosts: {
       inviters: "Mr. Sureshkumar. T & Mrs. Sandhya. K",
       address: "Ashiyana, MLA Road, Aramada Jn., Thrikkannapuram P.O., Thiruvananthapuram",
