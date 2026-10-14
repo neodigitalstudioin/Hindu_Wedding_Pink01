@@ -253,8 +253,8 @@
       { r: 105, g: 52, b: 26, isPetal: true }    // Deep Sandalwood Brown
     ];
 
-    // Ambient Auspicious Floating Petals & Golden Light Motes (Continuous blessings)
-    const AMBIENT_COUNT = 24;
+    // Ambient Auspicious Floating Petals & Golden Light Motes (Subtle, calm blessings)
+    const AMBIENT_COUNT = 8;
     function createAmbientParticle(initialSpread = false) {
       const isGold = Math.random() < 0.32;
       const color = petalColors[Math.floor(Math.random() * petalColors.length)];

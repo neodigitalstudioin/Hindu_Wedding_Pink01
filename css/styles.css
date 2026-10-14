@@ -505,7 +505,6 @@ body.invitation-opened .studio-pill {
   transform: rotate(45deg);
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
   display: inline-block;
-  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .eyebrow-text {
@@ -535,7 +534,6 @@ body.invitation-opened .studio-pill {
   color: var(--text-heading);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 16px rgba(212, 175, 55, 0.25);
   line-height: 1.22;
-  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .couple-name-part {
@@ -567,7 +565,6 @@ body.invitation-opened .studio-pill {
   text-shadow: 0 0 8px rgba(200, 50, 106, 0.3);
   line-height: 1;
   display: inline-block;
-  animation: ampHeartbeat 3.2s ease-in-out infinite;
 }
 
 .cover-datetime-text {
@@ -611,7 +608,6 @@ body.invitation-opened .studio-pill {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  animation: btnAuspiciousPulse 3.2s ease-in-out infinite;
 }
 
 .btn-open-invitation::before {
@@ -647,7 +643,6 @@ body.invitation-opened .studio-pill {
   width: 20px;
   height: 20px;
   color: #1a0308;
-  animation: starRotateSlow 18s linear infinite;
 }
 
 /* Cover Card Music Pill */
@@ -821,7 +816,6 @@ body.invitation-opened .studio-pill {
 .hero-top-divider .knot,
 .gold-divider-line .knot {
   display: inline-block;
-  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .revealed .hero-top-divider {
@@ -864,7 +858,6 @@ body.invitation-opened .studio-pill {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 16px rgba(212, 175, 55, 0.25);
   margin: 2px 0;
   line-height: 1.22;
-  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .hero-ampersand-wrap {
@@ -892,7 +885,6 @@ body.invitation-opened .studio-pill {
   text-shadow: 0 0 10px rgba(200, 50, 106, 0.35);
   line-height: 1;
   display: inline-block;
-  animation: ampHeartbeat 3.2s ease-in-out infinite;
 }
 
 /* 8 & 9. Marriage Date & Marriage Time */
@@ -1146,7 +1138,6 @@ body.invitation-opened .studio-pill {
   border: 2.5px solid var(--gold-primary);
   box-shadow: 0 14px 40px rgba(65, 30, 15, 0.18), 0 0 24px rgba(212, 175, 55, 0.25);
   transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-  animation: frameAuraBreath 5.5s ease-in-out infinite;
 }
 
 .story-photo-frame.couple-photo-frame:hover {
@@ -1240,7 +1231,6 @@ body.invitation-opened .studio-pill {
   color: var(--text-heading);
   text-transform: uppercase;
   margin: 4px 0 2px;
-  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .story-nickname {
@@ -1272,7 +1262,6 @@ body.invitation-opened .studio-pill {
   color: var(--gold-primary);
   font-size: 0.65rem;
   display: inline-block;
-  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .story-relation-label {
@@ -1437,7 +1426,6 @@ body.invitation-opened .studio-pill {
   letter-spacing: 0.08em;
   color: var(--text-heading);
   margin: 4px 0;
-  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .plaque-bride-name .nickname {
@@ -1503,7 +1491,6 @@ body.invitation-opened .studio-pill {
   color: var(--lotus-pink-deep);
   font-weight: 700;
   margin-bottom: 2px;
-  animation: timingBadgeGlow 3s ease-in-out infinite;
 }
 
 .timing-time {
@@ -2065,7 +2052,6 @@ body.invitation-opened .studio-pill {
   color: var(--text-heading);
   font-weight: 700;
   margin-bottom: 6px;
-  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .closing-hashtag {
