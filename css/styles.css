@@ -685,6 +685,18 @@ body.invitation-opened .studio-pill {
   box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
 }
 
+.cover-music-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-primary);
+  flex-shrink: 0;
+}
+
+.cover-music-pill.playing .cover-music-icon {
+  color: var(--lotus-pink-deep);
+}
+
 .cover-music-pill .audio-equalizer.mini {
   height: 10px;
   display: flex;
