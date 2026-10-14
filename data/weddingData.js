@@ -19,8 +19,8 @@ window.weddingDataDefault = {
 
   invitation: {
     eyebrow: "THE WEDDING CELEBRATION",
-    coupleDisplay: "Arun Raj GK & Reshma S",
-    groomName: "ARUN RAJ GK",
+    coupleDisplay: "Arun Raj GR & Reshma S",
+    groomName: "ARUN RAJ GR",
     brideName: "RESHMA S",
     date: "Saturday, October 31, 2026",
     time: "11:48 AM · Muhurtham",
@@ -31,7 +31,7 @@ window.weddingDataDefault = {
     eventDateTimeISO: "2026-10-31T11:48:00+05:30",
     message: "Together with our families, we joyfully invite you to celebrate our union.",
     verse: "Cordially invite your esteemed presence with family on the occasion of the marriage of our daughter",
-    subheading: "Reshma S (Ponnu) with Arun Raj GK",
+    subheading: "Reshma S (Ponnu) with Arun Raj GR",
     musicUrl: "assets/wedding_song.mp3",
     hosts: {
       inviters: "Mr. Sureshkumar. T & Mrs. Sandhya. K",
@@ -44,8 +44,8 @@ window.weddingDataDefault = {
   couple: {
     couplePhoto: "assets/couple.jpg",
     groom: {
-      name: "Arun Raj GK",
-      fullName: "Arun Raj GK",
+      name: "Arun Raj GR",
+      fullName: "Arun Raj GR",
       relationTitle: "SON OF",
       parents: "Mr. N. Raju & Mrs. Geetha Raju",
       photo: "assets/groom.jpg",

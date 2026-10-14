@@ -1,5 +1,5 @@
 /**
- * Arun Raj GK & Reshma S - Master Wedding Invitation Engine
+ * Arun Raj GR & Reshma S - Master Wedding Invitation Engine
  * Handles Cinematic Letter-by-Letter Text Animations,
  * Vertical Groom & Bride Storytelling Motion, Petals Canvas,
  * Audio Controller, Countdown, RSVP, Sharing, and Scroll Reveals.
@@ -77,7 +77,10 @@
       this.audioCtx = null;
       this.gainNode = null;
       this.intervalId = null;
-      this.audioElement = document.getElementById('weddingBgAudio') || new Audio('assets/wedding_song.mp3');
+      this.audioElement = document.getElementById('weddingBgAudio') || new Audio('/assets/wedding_song.mp3');
+      if (!this.audioElement.src) {
+        this.audioElement.src = '/assets/wedding_song.mp3';
+      }
       this.audioElement.loop = true;
       this.audioElement.preload = 'auto';
       this.audioElement.volume = 1.0;
@@ -250,7 +253,37 @@
       { r: 105, g: 52, b: 26, isPetal: true }    // Deep Sandalwood Brown
     ];
 
-    // --- BLAST EFFECT ON BUTTON CLICK (Petals ONLY during blast, clean after) ---
+    // Ambient Auspicious Floating Petals & Golden Light Motes (Continuous blessings)
+    const AMBIENT_COUNT = 24;
+    function createAmbientParticle(initialSpread = false) {
+      const isGold = Math.random() < 0.32;
+      const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+      return {
+        x: Math.random() * (width + 60) - 30,
+        y: initialSpread ? Math.random() * height : -Math.random() * 50 - 15,
+        vx: (Math.random() - 0.5) * 0.75,
+        vy: isGold ? (Math.random() * 0.55 + 0.3) : (Math.random() * 0.95 + 0.55),
+        friction: 0.995,
+        gravity: isGold ? 0.007 : 0.018,
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 1.6,
+        flutterAngle: Math.random() * Math.PI * 2,
+        flutterSpeed: Math.random() * 0.035 + 0.015,
+        size: isGold ? (Math.random() * 3.2 + 2) : (Math.random() * 11 + 7),
+        color,
+        alpha: Math.random() * 0.35 + 0.45,
+        decay: 0,
+        continuous: true,
+        isGold,
+        wobbleSpeed: Math.random() * 1.4 + 0.8
+      };
+    }
+
+    for (let i = 0; i < AMBIENT_COUNT; i++) {
+      particles.push(createAmbientParticle(true));
+    }
+
+    // --- BLAST EFFECT ON BUTTON CLICK (Celebratory shower of blessings) ---
     triggerPetalsBlast = function (originX, originY) {
       const centerX = originX || width / 2;
       const centerY = originY || height / 2;
@@ -278,6 +311,7 @@
             fadeIn: false,
             decay: Math.random() * 0.003 + 0.0018,
             continuous: false,
+            isGold: false,
             wobbleSpeed: Math.random() * 2 + 1.2
           });
         }
@@ -303,6 +337,7 @@
             fadeIn: false,
             decay: Math.random() * 0.0022 + 0.0012,
             continuous: false,
+            isGold: false,
             wobbleSpeed: Math.random() * 1.8 + 1.0
           });
         }
@@ -312,7 +347,6 @@
       spawnBlastFalling(90);
       setTimeout(() => { spawnScatter(80, 0.9); spawnBlastFalling(110); }, 180);
       setTimeout(() => { spawnBlastFalling(120); }, 460);
-      // Blast particles all have decay > 0, so they naturally fade and disappear — screen is clean after
     };
 
     function drawPetal(p) {
@@ -320,16 +354,26 @@
       ctx.translate(p.x, p.y);
       ctx.rotate((p.rotation * Math.PI) / 180);
 
-      const scaleX = Math.cos(p.flutterAngle * p.wobbleSpeed);
-      const scaleY = Math.sin(p.flutterAngle * 1.3) * 0.25 + 0.75;
-      ctx.scale(scaleX, scaleY);
+      if (p.isGold) {
+        const pulse = Math.sin(p.flutterAngle * 2.5) * 0.25 + 0.75;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245, 197, 66, ${p.alpha * pulse * 0.9})`;
+        ctx.shadowColor = 'rgba(255, 215, 0, 0.75)';
+        ctx.shadowBlur = 6;
+        ctx.fill();
+      } else {
+        const scaleX = Math.cos(p.flutterAngle * p.wobbleSpeed);
+        const scaleY = Math.sin(p.flutterAngle * 1.3) * 0.25 + 0.75;
+        ctx.scale(scaleX, scaleY);
 
-      ctx.beginPath();
-      ctx.moveTo(0, -p.size);
-      ctx.bezierCurveTo(p.size * 0.9, -p.size * 0.6, p.size * 0.8, p.size * 0.8, 0, p.size);
-      ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.8, -p.size * 0.9, -p.size * 0.6, 0, -p.size);
-      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha * 0.92})`;
-      ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size);
+        ctx.bezierCurveTo(p.size * 0.9, -p.size * 0.6, p.size * 0.8, p.size * 0.8, 0, p.size);
+        ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.8, -p.size * 0.9, -p.size * 0.6, 0, -p.size);
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha * 0.92})`;
+        ctx.fill();
+      }
 
       ctx.restore();
     }
@@ -360,9 +404,12 @@
           continue;
         }
 
-        // Recycle continuous petals (none exist now, but keep for safety)
-        if (p.continuous && p.y > height + 60) {
-          particles.splice(i, 1);
+        // Recycle continuous ambient petals
+        if (p.continuous && p.y > height + 50) {
+          p.y = -Math.random() * 40 - 10;
+          p.x = Math.random() * (width + 60) - 30;
+          p.vy = p.isGold ? (Math.random() * 0.55 + 0.3) : (Math.random() * 0.95 + 0.55);
+          p.vx = (Math.random() - 0.5) * 0.75;
           continue;
         }
 
@@ -481,7 +528,7 @@
     const btnCalendar = document.getElementById('btnShareCalendar');
     const btnCopyLink = document.getElementById('btnShareCopyLink');
 
-    const coupleName = 'Arun Raj GK & Reshma S';
+    const coupleName = 'Arun Raj GR & Reshma S';
     const dateText = 'Saturday, October 31, 2026';
     const hashtag = '#ArunWedsReshma';
     const pageUrl = window.location.href;
@@ -550,6 +597,7 @@
 
     const audioEngine = new LuxuryAudioEngine();
     const audioBtn = document.getElementById('audioToggleBtn');
+    const coverMusicBtn = document.getElementById('coverMusicBtn');
     const openInvitationBtn = document.getElementById('btnOpenInvitation');
     const coverScreen = document.getElementById('coverScreen');
 
@@ -559,16 +607,30 @@
     initShareButtons();
     initScrollReveal();
 
-    // Sync Audio Button UI
+    // Sync Audio Buttons UI (both top bar and cover card pill)
     audioEngine.onStateChange = (isPlaying) => {
-      if (!audioBtn) return;
-      const text = audioBtn.querySelector('.audio-text');
-      if (isPlaying) {
-        audioBtn.classList.add('playing');
-        if (text) text.innerText = 'MUSIC ON';
-      } else {
-        audioBtn.classList.remove('playing');
-        if (text) text.innerText = 'MUSIC OFF';
+      // Top bar button
+      if (audioBtn) {
+        const text = audioBtn.querySelector('.audio-text');
+        if (isPlaying) {
+          audioBtn.classList.add('playing');
+          if (text) text.innerText = 'MUSIC ON';
+        } else {
+          audioBtn.classList.remove('playing');
+          if (text) text.innerText = 'MUSIC OFF';
+        }
+      }
+
+      // Cover screen music pill
+      if (coverMusicBtn) {
+        const coverText = coverMusicBtn.querySelector('.cover-music-text');
+        if (isPlaying) {
+          coverMusicBtn.classList.add('playing');
+          if (coverText) coverText.innerText = 'MUSIC PLAYING';
+        } else {
+          coverMusicBtn.classList.remove('playing');
+          if (coverText) coverText.innerText = 'PLAY WEDDING SONG';
+        }
       }
     };
 
@@ -583,36 +645,52 @@
       });
     }
 
-    // --- AUTO-PLAY MUSIC ON OPEN INVITATION SCREEN ---
-    const triggerAutoAudio = () => {
-      if (!audioEngine.isPlaying) {
-        audioEngine.play().catch(() => {});
-      }
+    if (coverMusicBtn) {
+      coverMusicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        audioEngine.toggle();
+      });
+    }
+
+    // --- AUTO-PLAY MUSIC RIGHT ON OPEN INVITATION SCREEN ---
+    const startAudio = () => {
+      if (audioEngine.isPlaying) return Promise.resolve(true);
+      return audioEngine.play().then((ok) => {
+        return ok;
+      }).catch(() => false);
     };
 
-    // 1. Immediate autoplay attempt when the page lands
-    triggerAutoAudio();
-    window.addEventListener('load', triggerAutoAudio, { once: true });
+    // 1. Immediate autoplay attempts when the page lands
+    startAudio();
+    window.addEventListener('load', startAudio, { once: true });
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        startAudio();
+      }
+    });
 
-    // 2. Global unlock on first user interaction anywhere on the opening screen
-    // (Bypasses browser autoplay restrictions seamlessly upon any touch, click, scroll or tap)
-    const unlockEvents = ['pointerdown', 'touchstart', 'touchend', 'click', 'keydown', 'wheel', 'scroll'];
-    const handleFirstInteraction = () => {
-      triggerAutoAudio();
-      unlockEvents.forEach((evt) => {
-        window.removeEventListener(evt, handleFirstInteraction, { capture: true });
-        document.removeEventListener(evt, handleFirstInteraction, { capture: true });
+    // 2. Continuous gesture listener on the opening screen:
+    // Starts music instantly on first tap or click anywhere on the page
+    const gestureEvents = ['click', 'touchstart', 'touchend', 'pointerdown', 'pointerup', 'keydown'];
+    const handleGesture = () => {
+      startAudio().then((started) => {
+        if (started) {
+          gestureEvents.forEach((evt) => {
+            window.removeEventListener(evt, handleGesture, { capture: true });
+            document.removeEventListener(evt, handleGesture, { capture: true });
+          });
+        }
       });
     };
 
-    unlockEvents.forEach((evt) => {
-      window.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
-      document.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
+    gestureEvents.forEach((evt) => {
+      window.addEventListener(evt, handleGesture, { capture: true, passive: true });
+      document.addEventListener(evt, handleGesture, { capture: true, passive: true });
     });
 
     if (coverScreen) {
       coverScreen.addEventListener('click', () => {
-        triggerAutoAudio();
+        startAudio();
       }, { passive: true });
     }
 

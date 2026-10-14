@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ARUN RAJ GK & RESHMA S - SACRED HINDU WEDDING CELEBRATION
+   ARUN RAJ GR & RESHMA S - SACRED HINDU WEDDING CELEBRATION
    THEME: Traditional Temple Mandap Inspired by Theme.jpg
    Palette: Warm Ivory Sandalwood (#FAF5EC, #F6EFE3, #FBF8F2)
             Antique Temple Gold & Brass (#B8860B, #C8962E, #D4AF37, #8C6008)
@@ -321,13 +321,24 @@ body:not(.invitation-opened) #mainInvitation {
   pointer-events: none !important;
 }
 
-body:not(.invitation-opened) .floating-top-bar {
+/* Floating top bar is elevated above cover screen */
+.floating-top-bar {
+  z-index: 250 !important;
+}
+
+body:not(.invitation-opened) .studio-pill {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
-body.invitation-opened .floating-top-bar {
+body:not(.invitation-opened) .audio-control-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.invitation-opened .studio-pill {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -464,6 +475,8 @@ body.invitation-opened .floating-top-bar {
   object-fit: contain;
   filter: none !important;
   -webkit-filter: none !important;
+  animation: divineGanapathiFloat 4.2s ease-in-out infinite;
+  will-change: transform;
 }
 
 .sanskrit-shloka {
@@ -491,6 +504,8 @@ body.invitation-opened .floating-top-bar {
   background: linear-gradient(135deg, #dfb350, #b8860b);
   transform: rotate(45deg);
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  display: inline-block;
+  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .eyebrow-text {
@@ -520,6 +535,7 @@ body.invitation-opened .floating-top-bar {
   color: var(--text-heading);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 16px rgba(212, 175, 55, 0.25);
   line-height: 1.22;
+  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .couple-name-part {
@@ -550,6 +566,8 @@ body.invitation-opened .floating-top-bar {
   color: var(--lotus-pink);
   text-shadow: 0 0 8px rgba(200, 50, 106, 0.3);
   line-height: 1;
+  display: inline-block;
+  animation: ampHeartbeat 3.2s ease-in-out infinite;
 }
 
 .cover-datetime-text {
@@ -593,6 +611,7 @@ body.invitation-opened .floating-top-bar {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  animation: btnAuspiciousPulse 3.2s ease-in-out infinite;
 }
 
 .btn-open-invitation::before {
@@ -628,6 +647,68 @@ body.invitation-opened .floating-top-bar {
   width: 20px;
   height: 20px;
   color: #1a0308;
+  animation: starRotateSlow 18s linear infinite;
+}
+
+/* Cover Card Music Pill */
+.cover-music-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 154, 39, 0.45);
+  background: rgba(255, 252, 245, 0.94);
+  color: var(--kumkum-deep);
+  font-family: var(--font-serif-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(70, 30, 15, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cover-music-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.25);
+}
+
+.cover-music-pill.playing {
+  border-color: var(--gold-bright);
+  background: rgba(255, 248, 230, 0.98);
+  color: var(--lotus-pink-deep);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+}
+
+.cover-music-pill .audio-equalizer.mini {
+  height: 10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cover-music-pill .audio-equalizer.mini .bar {
+  width: 2px;
+  height: 3px;
+  background-color: var(--gold-primary);
+  border-radius: 1px;
+}
+
+.cover-music-pill.playing .audio-equalizer.mini .bar:nth-child(1) {
+  animation: eqBar 0.9s infinite ease-in-out alternate;
+}
+
+.cover-music-pill.playing .audio-equalizer.mini .bar:nth-child(2) {
+  animation: eqBar 0.7s infinite ease-in-out 0.2s alternate;
+}
+
+.cover-music-pill.playing .audio-equalizer.mini .bar:nth-child(3) {
+  animation: eqBar 1.1s infinite ease-in-out 0.4s alternate;
 }
 
 /* ==========================================================================
@@ -691,6 +772,8 @@ body.invitation-opened .floating-top-bar {
   object-fit: contain;
   filter: none !important;
   -webkit-filter: none !important;
+  animation: divineGanapathiFloat 4.2s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* 2. Sanskrit Blessing */
@@ -721,6 +804,12 @@ body.invitation-opened .floating-top-bar {
   opacity: 0;
   transform: scaleX(0.7);
   transition: opacity 0.5s ease 0.18s, transform 0.5s ease 0.18s;
+}
+
+.hero-top-divider .knot,
+.gold-divider-line .knot {
+  display: inline-block;
+  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .revealed .hero-top-divider {
@@ -763,6 +852,7 @@ body.invitation-opened .floating-top-bar {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 16px rgba(212, 175, 55, 0.25);
   margin: 2px 0;
   line-height: 1.22;
+  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .hero-ampersand-wrap {
@@ -789,6 +879,8 @@ body.invitation-opened .floating-top-bar {
   color: var(--lotus-pink);
   text-shadow: 0 0 10px rgba(200, 50, 106, 0.35);
   line-height: 1;
+  display: inline-block;
+  animation: ampHeartbeat 3.2s ease-in-out infinite;
 }
 
 /* 8 & 9. Marriage Date & Marriage Time */
@@ -1041,7 +1133,8 @@ body.invitation-opened .floating-top-bar {
   overflow: hidden;
   border: 2.5px solid var(--gold-primary);
   box-shadow: 0 14px 40px rgba(65, 30, 15, 0.18), 0 0 24px rgba(212, 175, 55, 0.25);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  animation: frameAuraBreath 5.5s ease-in-out infinite;
 }
 
 .story-photo-frame.couple-photo-frame:hover {
@@ -1135,6 +1228,7 @@ body.invitation-opened .floating-top-bar {
   color: var(--text-heading);
   text-transform: uppercase;
   margin: 4px 0 2px;
+  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .story-nickname {
@@ -1165,6 +1259,8 @@ body.invitation-opened .floating-top-bar {
 .gold-mini-divider .mini-knot {
   color: var(--gold-primary);
   font-size: 0.65rem;
+  display: inline-block;
+  animation: diamondSparkle 3.5s ease-in-out infinite;
 }
 
 .story-relation-label {
@@ -1329,6 +1425,7 @@ body.invitation-opened .floating-top-bar {
   letter-spacing: 0.08em;
   color: var(--text-heading);
   margin: 4px 0;
+  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .plaque-bride-name .nickname {
@@ -1387,13 +1484,14 @@ body.invitation-opened .floating-top-bar {
 }
 
 .timing-badge {
-  display: block;
+  display: inline-block;
   font-family: var(--font-serif-heading);
   font-size: 0.65rem;
   letter-spacing: 0.16em;
   color: var(--lotus-pink-deep);
   font-weight: 700;
   margin-bottom: 2px;
+  animation: timingBadgeGlow 3s ease-in-out infinite;
 }
 
 .timing-time {
@@ -1924,6 +2022,8 @@ body.invitation-opened .floating-top-bar {
   height: auto;
   filter: none !important;
   -webkit-filter: none !important;
+  animation: divineGanapathiFloat 4.2s ease-in-out infinite;
+  will-change: transform;
 }
 
 .closing-mantra {
@@ -1953,6 +2053,7 @@ body.invitation-opened .floating-top-bar {
   color: var(--text-heading);
   font-weight: 700;
   margin-bottom: 6px;
+  animation: nameGoldGlow 4.8s ease-in-out infinite;
 }
 
 .closing-hashtag {
@@ -2114,5 +2215,99 @@ body.invitation-opened .floating-top-bar {
     font-size: 0.95rem;
     line-height: 1.45;
     max-width: 330px;
+  }
+}
+
+/* ==========================================================================
+   SACRED AUSPICIOUS ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+
+/* 1. Divine Ganapathi Floating Levitation */
+@keyframes divineGanapathiFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 2. Royal Golden Breathing Glow on Sacred Names */
+@keyframes nameGoldGlow {
+  0%, 100% {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 14px rgba(212, 175, 55, 0.25);
+  }
+  50% {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 28px rgba(212, 175, 55, 0.65), 0 0 42px rgba(255, 215, 0, 0.4);
+  }
+}
+
+/* 3. Sacred Ampersand Heartbeat Pulse */
+@keyframes ampHeartbeat {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 0 0 10px rgba(200, 50, 106, 0.35);
+  }
+  50% {
+    transform: scale(1.12);
+    text-shadow: 0 0 18px rgba(232, 78, 135, 0.75), 0 0 28px rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* 4. Auspicious Diamond Knot Sparkle */
+@keyframes diamondSparkle {
+  0%, 100% {
+    transform: rotate(45deg) scale(1);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.3);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.9), 0 0 26px rgba(212, 175, 55, 0.6);
+  }
+}
+
+/* 5. Open Invitation Button Pulse */
+@keyframes btnAuspiciousPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(80, 40, 10, 0.25), 0 0 24px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 12px 32px rgba(80, 40, 10, 0.35), 0 0 38px rgba(245, 200, 66, 0.65), 0 0 55px rgba(212, 175, 55, 0.3);
+  }
+}
+
+/* 6. Rotating Star Seal */
+@keyframes starRotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 7. Couple Photo Frame Breathing Aura */
+@keyframes frameAuraBreath {
+  0%, 100% {
+    box-shadow: 0 14px 40px rgba(65, 30, 15, 0.18), 0 0 24px rgba(212, 175, 55, 0.25);
+    border-color: var(--gold-primary);
+  }
+  50% {
+    box-shadow: 0 18px 48px rgba(65, 30, 15, 0.24), 0 0 36px rgba(245, 200, 66, 0.45);
+    border-color: rgba(235, 190, 80, 0.85);
+  }
+}
+
+/* 8. Timing Badge Pulse for Sacred Muhurtham */
+@keyframes timingBadgeGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(200, 50, 106, 0.2);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(200, 50, 106, 0.45), 0 0 14px rgba(212, 175, 55, 0.35);
   }
 }
